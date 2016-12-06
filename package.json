@@ -1,0 +1,35 @@
+{
+  "name": "generator-spforms",
+  "version": "1.0.0",
+  "description": "yeoman generator for SharePoint Angular Forms",
+  "main": "index.js",
+  "files": [
+    "generators/app",
+    "generators/spform"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zerg00s/generator-spforms.git"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "Denis Molodtsov",
+  "license": "MIT",
+    "dependencies": {
+    "colors": "*",
+    "mkdirp": "*",
+    "path": "*",
+    "yeoman-generator": "*",
+    "yosay": "^*",
+    "lodash": "^4.16.4",
+    "cpass": "^1.0.2"
+  },
+  "bugs": {
+    "url": "https://github.com/Zerg00s/generator-spforms/issues"
+  },
+  "homepage": "https://github.com/Zerg00s/generator-spforms#readme"
+}
