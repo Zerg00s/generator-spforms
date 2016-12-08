@@ -3,6 +3,7 @@ var mkdirp = require('mkdirp');
 var path = require('path');
 var colors = require('colors');
 var yosay = require('yosay');
+var spforms = require('spforms');
 
 
 // CALL THIS SUBGENERATOR:
@@ -11,24 +12,34 @@ var yosay = require('yosay');
 module.exports = yeoman.Base.extend({
   constructor: function () {
     yeoman.Base.apply(this, arguments);
+  },
 
-    this.option('wtf');
-    this.log(this.options.wtf);
+  getListTitle: function() {
+      var prompts = (function() {
+          return [{
+              type: 'input',
+              name: 'listTitle',
+              message: 'Enter List Title',
+              default: this.config.get('listTitle') || 'TestList'
+          }];
+      }.bind(this))();
 
+      this._getArrayOfLists();
+
+      this.prompt(prompts).then(function (answers) {
+          var appName = this.config.set('listTitle', answers.listTitle);
+      }.bind(this));
   },
-    method1: function () {
-    console.log('method 1 just ran');
+  _getArrayOfLists: function(){
+    console.log('private method called');
+    //Return promose..
   },
-  method2: function () {
-    console.log('method 2 just ran');
-  },
-  method3: function(){
+
+  saveConfig: function(){
     console.log('running this.config.save()...');
     this.config.save();
   },
-  _privateMethod: function(){
-    console.log('private!');
-  },
+
   initializing   : {
     method4: function(){console.log('initializing  ')},
   },
@@ -36,21 +47,21 @@ module.exports = yeoman.Base.extend({
 
   },
   configuring   : {
-    method4: function(){console.log('configuring  '); this.method1()}
+    //method4: function(){console.log('configuring  '); this.method1()}
   },
   default   : {
-    method4: function(){console.log('default  ')},
+    //method4: function(){console.log('default  ')},
   },
   writing   : {
-    method4: function(){console.log('writing  ')},
+    //method4: function(){console.log('writing  ')},
   },
   conflicts   : {
-    method4: function(){console.log('conflicts  ')},
+    //method4: function(){console.log('conflicts  ')},
   },
   install   : {
-    method4: function(){console.log('install  ')},
+    //method4: function(){console.log('install  ')},
   },
   end    : {
-    method4: function(){console.log('end  spforms ')},
+    //method4: function(){console.log('end  spforms ')},
   }
 });

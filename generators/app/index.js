@@ -17,6 +17,9 @@ module.exports = yeoman.Base.extend({
     this.settings = {
         appname: this.appname
     };
+
+
+
     this.config.set('appname', this.appname);
     this.config.save();
 
