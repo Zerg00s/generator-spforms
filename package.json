@@ -5,7 +5,7 @@
   "main": "index.js",
   "files": [
     "generators/app",
-    "generators/spform"
+    "generators/list"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
