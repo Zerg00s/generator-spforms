@@ -5,8 +5,6 @@ var colors = require('colors');
 var yosay = require('yosay');
 var spforms = require('spforms');
 
-
-// CALL THIS SUBGENERATOR:
 // yo spforms:spform
 
 module.exports = yeoman.Base.extend({
@@ -14,54 +12,44 @@ module.exports = yeoman.Base.extend({
     yeoman.Base.apply(this, arguments);
   },
 
-  getListTitle: function() {
+  generateListForm: function() {
+    var Cpass = require("cpass");
+    var cpass = new Cpass();
+    var pass = cpass.decode(this.config.get('password'));
+    var username = this.config.get('username');
+    var siteurl = this.config.get('siteUrl');
+    var spformsHelper = spforms({username:username, password: pass});
+
+    var defaultListTitle = this.config.get('listTitle') || ''
+    var self = this;
+    
+    spformsHelper.getLists({siteUrl: siteurl}).then(function(lists){
       var prompts = (function() {
           return [{
-              type: 'input',
+              type: 'list',
               name: 'listTitle',
-              message: 'Enter List Title',
-              default: this.config.get('listTitle') || 'TestList'
+              message: 'Choose List',
+              choices: lists,
+              default: defaultListTitle
           }];
-      }.bind(this))();
+      }.bind(self))();
 
-      this._getArrayOfLists();
+      self.prompt(prompts).then(function (answers) {
+          self.config.set('listTitle', answers.listTitle);
+          var listTitle = answers.listTitle;
 
-      this.prompt(prompts).then(function (answers) {
-          var appName = this.config.set('listTitle', answers.listTitle);
+          var listSettings = {
+            siteUrl: self.config.get('siteUrl'),
+            listTitle: self.config.get('listTitle'),
+            sourcePath: self.config.get('dlRootFolder'), //root-relative path on the disk
+            assetsUrl: self.config.get('spRootFolder') //Assets folder Url
+          };
+
+          //Generate form based on the selected list
+          spformsHelper.generateAngularForm(listSettings);
+
       }.bind(this));
-  },
-  _getArrayOfLists: function(){
-    console.log('private method called');
-    //Return promose..
-  },
+    });
 
-  saveConfig: function(){
-    console.log('running this.config.save()...');
-    this.config.save();
-  },
-
-  initializing   : {
-    method4: function(){console.log('initializing  ')},
-  },
-  _prompting: function () {
-
-  },
-  configuring   : {
-    //method4: function(){console.log('configuring  '); this.method1()}
-  },
-  default   : {
-    //method4: function(){console.log('default  ')},
-  },
-  writing   : {
-    //method4: function(){console.log('writing  ')},
-  },
-  conflicts   : {
-    //method4: function(){console.log('conflicts  ')},
-  },
-  install   : {
-    //method4: function(){console.log('install  ')},
-  },
-  end    : {
-    //method4: function(){console.log('end  spforms ')},
   }
 });
