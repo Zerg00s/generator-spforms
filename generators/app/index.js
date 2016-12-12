@@ -51,9 +51,9 @@ module.exports = yeoman.Base.extend({
       }.bind(this))();
 
       return this.prompt(prompts).then(function (answers) {
-          var Cpass = require("cpass");
-          var cpass = new Cpass();
-          answers.password = cpass.encode(answers.password);
+          //var Cpass = require("cpass");
+          //var cpass = new Cpass();
+          //answers.password = cpass.encode(answers.password);
           _.assignIn(this.settings, answers);
       }.bind(this));
   },
@@ -90,6 +90,9 @@ module.exports = yeoman.Base.extend({
         }
     }
     this.config.save();
+  },
+
+ installSpforms: function () {
+     this.npmInstall(['spforms'], { 'save': true });
   }
- 
 });
