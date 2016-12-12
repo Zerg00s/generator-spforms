@@ -1,12 +1,6 @@
 var yeoman = require('yeoman-generator');
-var mkdirp = require('mkdirp');
-var path = require('path');
-var colors = require('colors');
-var yosay = require('yosay');
 var spforms = require('spforms');
-
 // yo spforms:spform
-
 module.exports = yeoman.Base.extend({
   constructor: function () {
     yeoman.Base.apply(this, arguments);
@@ -45,7 +39,7 @@ module.exports = yeoman.Base.extend({
             assetsUrl: self.config.get('spRootFolder') //Assets folder Url
           };
 
-          //Generate form based on the selected list
+          //Generate forms based on the selected list
           spformsHelper.generateAngularForm(listSettings);
 
       }.bind(this));

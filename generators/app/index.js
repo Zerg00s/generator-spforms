@@ -8,38 +8,9 @@ var _ = require('lodash');
 module.exports = yeoman.Base.extend({
   constructor: function () {
     yeoman.Base.apply(this, arguments);
-    //this.argument('appname', {type:String, required:true});
-    //this.log(this.appname);
-
-    this.option('wtf');
-    this.log(this.options.wtf);
-    
-    this.settings = {
-        appname: this.appname
-    };
-
-
-
-    this.config.set('appname', this.appname);
-    this.config.save();
-
+    this.settings = { };
   },
-    method1: function () {
-    //console.log('method 1 just ran');
-  },
-  method2: function () {
-    //console.log('method 2 just ran');
-  },
-  method3: function(){
-    //console.log('running this.config.save()...');
-    //this.config.save();
-  },
-  _privateMethod: function(){
-    //console.log('private!');
-  },
-  initializing   : {
-   // method4: function(){console.log('initializing  ')},
-  },
+   
   tenant: function() {
       var prompts = (function() {
           return [{
@@ -84,8 +55,6 @@ module.exports = yeoman.Base.extend({
           var cpass = new Cpass();
           answers.password = cpass.encode(answers.password);
           _.assignIn(this.settings, answers);
-          console.log("For advanced auth scenarious please check 'Communication layer settings'");
-          console.log("section at https://github.com/koltyakov/generator-sppp");
       }.bind(this));
   },
   mapping: function() {
@@ -106,10 +75,7 @@ module.exports = yeoman.Base.extend({
       return this.prompt(prompts).then(function (answers) {
           _.assignIn(this.settings, answers);
       }.bind(this));
-
-      
   },
- 
 
   configure: function () {
     for (var prop in this.settings) {
@@ -124,21 +90,6 @@ module.exports = yeoman.Base.extend({
         }
     }
     this.config.save();
-  },
-  
-  default   : {
-   // method4: function(){console.log('default  ')},
-  },
-  writing   : {
-   // method4: function(){console.log('writing  ')},
-  },
-  conflicts   : {
-   // method4: function(){console.log('conflicts  ')},
-  },
-  install   : {
-    //method4: function(){console.log('install  ')},
-  },
-  end    : {
-   // method4: function(){console.log('end   ')},
   }
+ 
 });
