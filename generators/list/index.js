@@ -41,6 +41,9 @@ module.exports = yeoman.Base.extend({
 
           //Generate forms based on the selected list
           spformsHelper.generateAngularForm(listSettings);
+          console.log('Adding Attachments list');
+          //Add Attachments list
+          spformsHelper.createList(listSettings, listSettings);
 
       }.bind(this));
     });
