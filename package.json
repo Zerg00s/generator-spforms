@@ -1,6 +1,6 @@
 {
   "name": "generator-spforms",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "yeoman generator for SharePoint Angular Forms",
   "main": "index.js",
   "files": [

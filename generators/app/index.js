@@ -79,7 +79,6 @@ module.exports = yeoman.Base.extend({
 
   configure: function () {
     for (var prop in this.settings) {
-      console.log(prop);
         if (this.settings.hasOwnProperty(prop) && prop !== 'password') {
             this.config.set(prop, this.settings[prop]);
         }
